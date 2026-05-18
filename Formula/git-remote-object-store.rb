@@ -1,0 +1,52 @@
+# typed: false
+# frozen_string_literal: true
+
+# Rendered by .github/workflows/release.yml on each v* tag.
+# Tokens substituted: 0.2.1, be88e74cb738b976987cf2d812a219ffdf070fc9f9fa7a32a96f58950e31c707.
+class GitRemoteObjectStore < Formula
+  desc "Git remote helper backed by cloud object stores (S3, Azure Blob)"
+  homepage "https://github.com/dekobon/git-remote-object-store"
+  version "0.2.1"
+  license "Apache-2.0"
+  depends_on "git"
+
+  # Apple-silicon-only. Intel Macs install via `cargo install
+  # git-remote-object-store-cli` or run the aarch64 build under
+  # Rosetta 2.
+  on_macos do
+    on_arm do
+      url "https://github.com/dekobon/git-remote-object-store/releases/download/v#{version}/git-remote-object-store-#{version}-aarch64-apple-darwin.tar.gz"
+      sha256 "be88e74cb738b976987cf2d812a219ffdf070fc9f9fa7a32a96f58950e31c707"
+    end
+  end
+
+  def install
+    # Six binaries; install the hyphenated names cargo built and
+    # hardlink the `+`-form names git invokes directly.
+    #
+    # Source of truth for the (cargo-name, plus-name) pairs is the
+    # `HELPER_PAIRS` const in `xtask/src/install.rs`. The
+    # `packaging_sync` unit tests there will fail on drift.
+    %w[
+      git-remote-s3-https git-remote-s3-http
+      git-remote-az-https git-remote-az-http
+      git-remote-object-store git-lfs-object-store
+    ].each { |b| bin.install b }
+    {
+      "git-remote-s3-https" => "git-remote-s3+https",
+      "git-remote-s3-http"  => "git-remote-s3+http",
+      "git-remote-az-https" => "git-remote-az+https",
+      "git-remote-az-http"  => "git-remote-az+http",
+    }.each do |src, dst|
+      ln bin/src, bin/dst
+    end
+    doc.install "README.md", "LICENSE", "THIRD-PARTY-LICENSES.md", "CHANGELOG.md"
+    # Manpages — clap-derived for the management CLI and its subcommands,
+    # hand-authored stubs for the helper-protocol binaries and LFS agent.
+    man1.install Dir["man/*.1"] if Dir.exist?("man")
+  end
+
+  test do
+    assert_match version.to_s, shell_output("#{bin}/git-remote-object-store --version")
+  end
+end
