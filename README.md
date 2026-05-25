@@ -19,6 +19,7 @@ brew install dekobon/tap/<formula>
 
 | Formula | Description |
 | --- | --- |
+| [`big-code-analysis`](Formula/big-code-analysis.rb) | Compute maintainability metrics for source code in many languages. |
 | [`host-identity`](Formula/host-identity.rb) | Stable host UUID across platforms, clouds, and Kubernetes. |
 
 ## Platform support
