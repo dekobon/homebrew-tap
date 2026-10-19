@@ -2,11 +2,11 @@
 # frozen_string_literal: true
 
 # Rendered by .github/workflows/release.yml on each v* tag.
-# Tokens substituted: 0.2.6, 0c8e6f12b62b3d1a589134a08f3609c74a4c57073fa82d0618de5078008ca2aa.
+# Tokens substituted: 0.2.7, 97b0ebea8e964084729a7588e0d87c2e33efc90da84f492e614d6270900c422c.
 class GitRemoteObjectStore < Formula
   desc "Git remote helper backed by cloud object stores (S3, Azure Blob)"
   homepage "https://github.com/dekobon/git-remote-object-store"
-  version "0.2.6"
+  version "0.2.7"
   license "Apache-2.0"
   depends_on "git"
 
@@ -16,7 +16,7 @@ class GitRemoteObjectStore < Formula
   on_macos do
     on_arm do
       url "https://github.com/dekobon/git-remote-object-store/releases/download/v#{version}/git-remote-object-store-#{version}-aarch64-apple-darwin.tar.gz"
-      sha256 "0c8e6f12b62b3d1a589134a08f3609c74a4c57073fa82d0618de5078008ca2aa"
+      sha256 "97b0ebea8e964084729a7588e0d87c2e33efc90da84f492e614d6270900c422c"
     end
   end
 
