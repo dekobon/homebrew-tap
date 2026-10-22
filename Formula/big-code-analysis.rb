@@ -2,11 +2,11 @@
 # frozen_string_literal: true
 
 # Rendered by .github/workflows/release.yml on each v* tag.
-# Tokens substituted: 2.3.1, e597e30adbbad7f522d97fad05e7d84b8d28318c4d8ae40a144beede72a615f1.
+# Tokens substituted: 2.4.0, 058653d31c11366ace9a26501aee47a0c9bcd07f464e83e05e9a97ff514c8164.
 class BigCodeAnalysis < Formula
   desc "Compute maintainability metrics for source code in many languages"
   homepage "https://github.com/dekobon/big-code-analysis"
-  version "2.3.1"
+  version "2.4.0"
   license "MPL-2.0"
 
   # Apple-silicon-only. Intel Macs install via `cargo install
@@ -17,7 +17,7 @@ class BigCodeAnalysis < Formula
   on_macos do
     on_arm do
       url "https://github.com/dekobon/big-code-analysis/releases/download/v#{version}/big-code-analysis-#{version}-aarch64-apple-darwin.tar.gz"
-      sha256 "e597e30adbbad7f522d97fad05e7d84b8d28318c4d8ae40a144beede72a615f1"
+      sha256 "058653d31c11366ace9a26501aee47a0c9bcd07f464e83e05e9a97ff514c8164"
     end
   end
 
